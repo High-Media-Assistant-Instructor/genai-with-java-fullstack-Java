@@ -1,0 +1,327 @@
+
+----------------------------------
+변수종류 : 저장하는 데이터에 따른 분류
+- 변수(기본자료형 변수) : 값을 저장하는 공간 (기본자료형으로 만드는 대상을 지칭함)
+- 객체(=참조변수 = 참조자료형 변수 = 인스턴스(instance) ) : 값이 저장되어 있는 메모리 주소값을 저장하는 공간, 클래스급 이상의 자료형을 복사하여 만드는 대상을 지칭함
+
+
+변수종류 : 선언되는 위치에 따른 분류
+- 멤버변수 : 클래스의 자식으로 존재하는 변수(인스턴스변수와 정적변수가 있다.)
+- 전역변수 : 전역에 걸쳐 사용할 수 있는 변수 (대표적인 예: 멤버변수)
+- 지역변수(stack 영역) : 메소드, 조건문, 반복문, 생성자, 초기화블록 등 블록 내에 선언된 변수
+**지역변수의 생명주기 : 해당 변수가 선언된 시점부터 변수를 감싸고 있는 해당 블록이 종료되기 전까지
+**지역변수의 접근방법 : 변수명
+- 매개인자(매개변수에 포함되는 부분) : 매개체의 원인이 되는 데이터나 변수를 의미, 메소드를 호출하는 곳에서 보내는 데이터 또는 데이터를 가지고 있는 변수(기본변수,참조변수등)
+- 매개변수(=Parameter) : 메소드를 호출하는 곳에서 보내는 데이터와 데이터를 받는 매개체가 되는 변수(기본변수,참조변수등)
+**매개변수의 생명주기 : 매개값을 받은 부분부터 해당 메소드가 종료되기 전까지
+**매개변수의 접근방법 : 매개변수명
+
+
+- 인스턴스 변수(heap 영역) : 객체(=인스턴스)가 가지고 있는 멤버 변수 중 정적변수가 아닌 것
+**인스턴스 변수의 생명주기: 객체가 생성되고 해당 객체가 소멸될때까지 살아있다.
+**인스턴스 변수의 접근방법 : 인스턴스명.변수명 또는 객체명.변수명
+- 정적변수(static변수(=클래스변수)) (method영역 = static영역 = 데이터영역 = 클래스영역) : static키워드가 붙은 멤버변수(메모리가 공유됨)
+**정적변수의 생명주기 : 클래스가 메모리에 올라갈때부터 프로그램이 종료될때까지
+**정적변수의 접근방법 : 클래스명.변수명
+
+
+메모리 영역
+스택영역(stack) : 임시영역(생명주기가 가장 짧음, 지역변수의 생성~소멸까지) 지역변수, 임시 값(데이터) , 연산 순서 등이 저장
+힙영역(heap) : 객체영역(생성주기가 객체의 생성~소멸까지) 인스턴스, 인스턴스변수 등이 저장
+메소드영역(method) : 프로그램영역(프로그램이 실행되고 종료될때까지), 모든 클래스들, static키워드가 붙은 변수나 메소드들 등이 저장
+
+
+================================================
+
+
+
+public class Wrap01 {
+
+	public static void main(String[] args) {
+		
+		//기본 자료형에서 문자열 자료형으로 변환(랩퍼클래스 이용)
+		// int => String
+		int i = 50;
+		String s = String.valueOf(i);
+		s = Integer.toString(i); // 클래스명.toString(정수값 또는 기본정수형 변수);
+		
+		//Integer => String
+		Integer w_i = 50;
+		String w_s = String.valueOf(w_i);
+		w_s = w_i.toString(); //랩퍼클래스객체명.toString();
+		
+		//String => int "반드시 정수값으로 변`환 가능한 문자열값이어야만 함"
+		i = Integer.parseInt(s); 
+		//String => Integer "반드시 정수값으로 변환 가능한 문자열값이어야만 함"
+		w_i = Integer.valueOf(w_s); 
+		System.out.println("\n================================\n");
+		
+		//long => String
+		long l = 50L;
+		s = String.valueOf(l);
+		s = Long.toString(l); // 클래스명.toString(정수값 또는 기본정수형 변수);
+		
+		//Long => String
+		Long w_l = 50L;
+		w_s = String.valueOf(w_l);
+		w_s = w_i.toString(); //랩퍼클래스객체명.toString();
+		
+		//String => long "반드시 정수값으로 변환 가능한 문자열값이어야만 함"
+		l = Long.parseLong(s); 
+		//String => Long "반드시 정수값으로 변환 가능한 문자열값이어야만 함"
+		w_l = Long.valueOf(w_s); 
+		System.out.println("\n================================\n");
+		
+		// float => String
+		float f = 50;
+		s = String.valueOf(f);
+		s = Float.toString(f); // 클래스명.toString(실수값 또는 기본실수형 변수);
+		
+		//Float => String
+		Float w_f = 50.25F;
+		w_s = String.valueOf(w_f);
+		w_s = w_i.toString(); //랩퍼클래스객체명.toString();
+		
+		//String => float "반드시 실수값으로 변환 가능한 문자열값이어야만 함"
+		f = Float.parseFloat(s); 
+		//String => Float "반드시 실수값으로 변환 가능한 문자열값이어야만 함"
+		w_f = Float.valueOf(w_s); 
+		System.out.println("\n================================\n");
+		
+		
+	}
+
+}
+
+=================================================
+
+1. 모듈 (Module)
+하나의 파일(.py 등)에 정의된 코드의 집합. 함수, 클래스, 변수 등을 담고 있음.
+Python에서는 "import math"처럼 불러오는 것이 모듈임
+- 예시: math.py
+
+
+2. 패키지 (Package)
+여러 모듈 파일들을 디렉토리(폴더)로 묶은 것. 
+예시: numpy, pandas, sklearn, 자바패키지 등
+
+
+
+3. 라이브러리 (Library)
+특정 기능을 수행하는 모듈 또는 패키지의 집합. 개발자가 쉽게 기능을 사용할 수 있도록 만든 코드 모음.
+코드 재사용성을 위해 배포되는 형태. 모듈/패키지보다 더 큰 단위의 개념.
+예시 : NumPy, TensorFlow, Requests, Matplotlib
+
+
+
+ 4. API (Application Programming Interface)
+프로그램이 다른 프로그램과 소통할 수 있는 기능을 제공하는 함수/메서드 명세, URL, 리턴 값 등의 인터페이스 묶음.
+다른 소프트웨어 기능을 사용할 수 있게 해주는 명세 또는 통신 수단.
+예시 : 
+  - Restful API , Java API
+
+
+5. 플러그인 (Plugin)
+기존 프로그램의 기능을 확장하거나 추가할 수 있는 외부 모듈 또는 도구.
+기존 소프트웨어에 연결해서 동작하며, 독립 실행은 어려움.
+예시 : 
+  - Chrome 확장 프로그램
+  - VS Code의 Python 플러그인
+--------------------------------------------------------------------
+
+자바 API 란 : 
+Java에서 기본으로 제공하는 클래스와 인터페이스의 집합
+Java에서 미리 정의해 놓은 클래스, 인터페이스, 메서드들의 목록과 설명서
+
+예) 예: java.lang.String, java.util.ArrayList, java.io.File 등등
+
+-------------------------------------------------------------------
+
+public class StringEx {
+	public static void main(String[] args) {
+
+		// compareTo : 문자열 비교
+		// 문자열 비교: 값을 int로 반환.
+		// 1) 비교대상에 문자열이 포함되어 있을 경우(단, 첫글자부터 같은 문자열이어야 한다) : 서로의 문자열 길이의 차이값을 리턴
+		// 2) 비교대상과 전혀 다른 문자열인 경우(단, 첫글자부터 다른 문자열인 경우도 해당)
+		// 동일하지 않은 문자열의 시작 문자열의 아스키코드값 차를 반환
+
+		String str = new String("abcd");
+		System.out.println("원본 문자열 : " + str);
+		System.out.println(
+				"0-1번. 문자열개수비교 : " + str.length() + "개 - 2개 : " 
+				+ str.compareTo("ab")
+		);
+		
+		System.out.println(
+				"0-2번. 아스키코드 차 : " + (int) 'a' + " - " + (int) 'b' + 
+				" : " + str.compareTo("bc")
+		);
+		
+		System.out.println(
+				"1번. 아스키코드 차 : " + (int) 'a' + " - " + (int) 'b' + 
+				" : " + str.compareTo("bcef")
+		);
+		
+		System.out.println("2-1번. 문자열개수비교 : " + str.compareTo("abcde"));
+		System.out.println(
+				"2-2번. 아스키코드 차 : " + (int) 'a' + " , " + (int) 'u' + 
+				" , " + str.compareTo("uvwxyz")
+		);
+		
+		System.out.println("3번. " + str.compareTo("abcd"));
+		System.out.println("4번. " + str.compareTo("adef"));
+		System.out.println("5번. " + str.compareTo("Abcd"));
+		
+		System.out.println("6-1번. " + str.compareToIgnoreCase("Abcd"));
+		System.out.println("6-2번. " + str.compareToIgnoreCase("ACd"));
+		System.out.println("compareTo() 메소드 호출 후 원본 문자열 : " + str);
+		System.out.println("\n=====================================\n");
+
+		// 숫자비교 : 값을 int로 반환. 크다(1), 같다(0), 작다(-1)
+		Integer x = 3;
+		Integer y = 4;
+		Double z = 1.0;
+
+		System.out.println("7번. x<y 의미 : " + x.compareTo(y));
+		System.out.println("8번. x==3 의미 : " + x.compareTo(3));
+		System.out.println("9번. x>2 의미 : " + x.compareTo(2));
+		System.out.println("10번. z<2.7 의미 : " + z.compareTo(2.7));
+
+	}
+}
+
+============================================================
+객체 비교
+
+package abc;
+
+public class InsCompare {
+    public static void main(String[] args) {
+        String str1 = "안녕,자바!!!";
+        String str2 = "안녕,자바!!!";
+        String str3 = new String("안녕,자바!!!");
+        String str4 = str3.intern();
+
+        System.out.println("\n===============\n");
+        System.out.printf("str1: %s %n", str1);
+        System.out.println("str2: %s".formatted(str2));
+        System.out.println("str3: "+str3);
+        System.out.println("str4: "+str4);
+
+
+        //객체 비교
+        System.out.println("\n===============\n");
+        if(str1 == str2) System.out.println("str1 == str2");
+        else System.out.println("str1 != str2");
+
+        if(str1 == str3) System.out.println("str1 == str3");
+        else System.out.println("str1 != str3");
+
+        if(str1 == str4) System.out.println("str1 == str4");
+        else System.out.println("str1 != str4");
+
+        if(str3 == str4) System.out.println("str3 == str4");
+        else System.out.println("str3 != str4");
+
+        //값 비교
+        System.out.println("\n===============\n");
+        if(str1.equals(str2)) System.out.println("str1 값 == str2 값");
+        else System.out.println("str1 값 != str2 값");
+
+        if(str1.equals(str3)) System.out.println("str1 값 == str3 값");
+        else System.out.println("str1 값 != str3 값");
+
+        if(str1.equals(str4)) System.out.println("str1 값 == str4 값");
+        else System.out.println("str1 값 != str4 값");
+
+        if(str3.equals(str4)) System.out.println("str3 값 == str4 값");
+        else System.out.println("str3 값 != str4 값");
+
+        //identityHashCode값
+        System.out.println("\n===============\n");
+        System.out.println("identityHashCode값");
+        System.out.println("str1:"+System.identityHashCode(str1));
+        System.out.println("str2:"+System.identityHashCode(str2));
+        System.out.println("str3:"+System.identityHashCode(str3));
+        System.out.println("str4:"+System.identityHashCode(str4));
+
+        //hashCode값
+        System.out.println("\n===============\n");
+        System.out.println("hashCode값");
+        System.out.println("str1:"+str1.hashCode());
+        System.out.println("str2:"+str2.hashCode());
+        System.out.println("str3:"+str3.hashCode());
+        System.out.println("str4:"+str4.hashCode());
+
+    }
+}
+
+--------------------------------------------------------------------------
+
+package abc;
+
+public class InsCompare1 {
+    public static void main(String[] args) {
+        Integer inte1 = 55;
+        Integer inte2 = 55;
+        int inte3 = 55;
+
+        System.out.println("\n===============\n");
+        System.out.printf("inte1: %s %n", inte1);
+        System.out.println("inte2: %s".formatted(inte2));
+        System.out.println("inte3: "+inte3);
+
+
+        //객체 비교
+        System.out.println("\n===============\n");
+        if(inte1 == inte2) System.out.println("inte1 == inte2");
+        else System.out.println("inte1 != inte2");
+
+        if(inte1 == inte3) System.out.println("inte1 == inte3");
+        else System.out.println("inte1 != inte3");
+
+
+        //값 비교
+        System.out.println("\n===============\n");
+        if(inte1.equals(inte2)) System.out.println("inte1 값 == inte2 값");
+        else System.out.println("inte1 값 != inte2 값");
+
+        if(inte1.equals(inte3)) System.out.println("inte1 값 == inte3 값");
+        else System.out.println("inte1 값 != inte3 값");
+
+        //identityHashCode값
+        System.out.println("\n===============\n");
+        System.out.println("identityHashCode값");
+        System.out.println("inte1:"+System.identityHashCode(inte1));
+        System.out.println("inte2:"+System.identityHashCode(inte2));
+        System.out.println("inte3:"+System.identityHashCode(inte3));
+
+        //hashCode값
+        System.out.println("\n===============\n");
+        System.out.println("hashCode값");
+        System.out.println("inte1:"+inte1.hashCode());
+        System.out.println("inte2:"+inte2.hashCode());
+//        System.out.println("inte3:"+inte3.hashCode());
+
+    }
+}
+
+
+--------------------------------------------------------------------------
+
+
+** 상속
+
+
+
+
+
+
+
+
+
+
+
+
+
