@@ -1,0 +1,158 @@
+객체지향 프로그래밍 설계와 5원칙(SOLID)에 대하여
+객체지향 프로그래밍(OOP, Object-Oriented Programming)
+: 객체(Object)들의 상호작용으로 구성하는 프로그래밍 방식, 문제 해결 방식(패러다임)을 말함. 
+: 객체는 상태(속성)와 행동(메서드)을 가짐.
+
+OOP의 주요 특징
+- 캡슐화 (Encapsulation) : 데이터와 메서드를 하나로 묶고, 외부에서 직접 접근하지 못하도록 제한
+- 상속 (Inheritance) : 기존 클래스의 속성과 메서드를 재사용하고 확장할 수 있다.
+- 다형성 (Polymorphism): 같은 인터페이스로 다른 방식의 동작을 구현(상속 자식클래스의 메소드 구현에 따라 달라짐)
+- 추상화 (Abstraction): 핵심적인 개념만 노출하고, 세부 구현은 감춤
+
+
+ SOLID 원칙이란?
+SOLID는 OOP 설계에서 유지보수성, 확장성, 유연성을 높이기 위한 5가지 원칙을 말함.
+
+1. S - 단일 책임 원칙 (Single Responsibility Principle, SRP)
+: 클래스는 하나의 책임만 가져야 하며, 변경 사유는 오직 하나여야 한다.
+=> 주제에 따른 클래스를 하나를 만들고, 해당 클래스의 기능들은 기능별로 분류하는 것을 말함.
+목적 - 클래스를 변경하는 이유를 하나로 제한하기 위해
+장점 - 코드 유지보수 쉬움, 기능 확장이 쉽고 간단함, 테스트 용이
+방법 - 역할을 기준으로 클래스를 분리할 것
+
+
+2. O - 개방-폐쇄 원칙 (Open/Closed Principle, OCP) 
+: 소프트웨어 구성요소(클래스, 모듈 등)는 "기능 확장에는 열려(Open)" 있어야 하고, "기존 코드 수정에는 닫혀(Closed)" 있어야 한다.
+=> (즉, 기능 추가는 가능하되, 기존 코드 수정은 최소화). 인터페이스로 틀을 고정하여 처리하는 것
+목적 - 안정성 확보, 유지보수 편리성 높일 수 있다.
+방법 - 인터페이스 또는 추상 클래스 사용으로 구조 설계
+
+
+3. L - 리스코프 치환 원칙 (Liskov Substitution Principle, LSP)
+: 자식 클래스는 언제나 부모 클래스의 역할을 대체할 수 있어야 한다.
+=> 부모 클래스를 사용하는 코드에서 자식 클래스를 대신 넣어도 프로그램이 문제 없이 동작해야 한다는 의미임.
+부모와 자식 클래스에 같은 메소드가 존재할 때 부모클래스 대신 자식클래스를 넣어도 프로그램이 정상적으로 실행됨을 의미. 단 자식클래스별 맞는 기능만 추가되어 정상 실행이 되어야 함. 그래야 완벽한 대체.(이 부분은 아래의 인터페이스 분리 원칙과 연결되기도 함)
+
+
+4. I - 인터페이스 분리 원칙 (Interface Segregation Principle, ISP)
+: 하나의 일반적인 인터페이스보다는, 기능에 맞는 여러 개의 인터페이스가 더 낫다.
+예) TV와 Radio라는 인터페이스가 있다고 가정할 때
+TV는 볼륨업다운, 채널업다운, 전원 온/오프, 밝기업다운 등의 기능이 있고,
+Radio는 볼륨업다운, 채널업다운, 전원 온/오프 등의 기능이 있다고 하는 경우
+부모를 하나로만 만들어서 볼륨업다운, 채널업다운, 전원 온/오프, 밝기업다운의 기능을 몰아버리면
+TV 는 괜찮지만 Radio는 없는 밝기없다운의 기능이 생겨버린다. 따라서 이런 경우 부모를 분리하여
+필요한 기능에 따라 자식에 따라 상속여부를 다르게 처리하면 불필요한 기능을 없앨 수 있다.
+
+5. D - 의존 역전 원칙 (Dependency Inversion Principle, DIP)
+: 고수준 모듈(상위)은 저수준 모듈(하위)에 의존하면 안 되며, 둘 다 추상화에 의존해야 한다.
+=> 해당 기능을 직접 상위모델, 하위모델에 각각 구현하는 것이 아닌, 인터페이스나 추상 클래스에 의존하라는 의미임.
+
+예) TV, Mobile의 공통적인 기능은 볼륨업다운, 채널업다운, 전원 온/오프, 밝기업다운 기능들이 있다.
+그런데 TV를 상위 모듈로 만들어 TV에 해당되는 로직을 구현하고, 하위 Mobile 모듈도 로직을 구현하는 경우 TV의 기능이 오버라이딩으로 인해 가려지는 현상이 발생될 수 있다. 따라서 이런 경우는 상위를 아예 추상메소드를 이용하여 틀만 고정시키고, TV, Mobile모듈에 각각 상속관계를 부여하면 해당 호출 로직은 동일하면서 서로 다른 기능을 이용할 수 있게 된다.
+그리고 해당 모듈은 모두 추상메소드에 의존하게 된다.
+
+Machine 클래스는 TV, Mobile 클래스의 구체적인 코드구현을 몰라도 된다.
+새로운 입력 장치가 생겨도 Machine는 전혀 수정하지 않음. 
+해당 입력 장치 클래스의 메소드 코드만 수정하면 됨.
+
+예시: 
+interface MachineInterface{
+    void volumeUp();
+    void volumeDown();
+    void channelUp();
+    void channelDown();
+    void powerOn();
+    void powerOff();
+    void lightUp();
+    void lightDown();
+}
+
+class Mobile implements MachineInterface{
+    public void volumeUp(){
+        System.out.println("핸드폰 볼륨올리기");
+    }
+    public void volumeDown(){
+        System.out.println("핸드폰 볼륨내리기");
+    }
+    public void channelUp(){
+        System.out.println("핸드폰 채널올리기");
+    }
+    public void channelDown(){
+        System.out.println("핸드폰 채널내리기");
+    }
+    public void powerOn(){
+        System.out.println("핸드폰 전원켜기");
+    }
+    public void powerOff(){
+        System.out.println("핸드폰 전원끄기");
+    }
+    public void lightUp(){
+        System.out.println("핸드폰 밝기올리기");
+    }
+    public void lightDown(){
+        System.out.println("핸드폰 밝기내리기");
+    }
+}
+
+class TV implements MachineInterface{
+    public void volumeUp(){
+        System.out.println("TV 볼륨올리기");
+    }
+    public void volumeDown(){
+        System.out.println("TV 볼륨내리기");
+    }
+    public void channelUp(){
+        System.out.println("TV 채널올리기");
+    }
+    public void channelDown(){
+        System.out.println("TV 채널내리기");
+    }
+    public void powerOn(){
+        System.out.println("TV 전원켜기");
+    }
+    public void powerOff(){
+        System.out.println("TV 전원끄기");
+    }
+    public void lightUp(){
+        System.out.println("TV 밝기올리기");
+    }
+    public void lightDown(){
+        System.out.println("TV 밝기내리기");
+    }
+}
+
+class Machine{
+    private MachineInterface itf;
+
+    public Machine(MachineInterface itf){
+        this.itf = itf;
+    }
+
+    public void execFnc( ){
+        itf.volumeUp();
+        itf.volumeDown();
+
+        itf.channelUp();
+        itf.channelDown();
+
+        itf.powerOn();
+        itf.powerOff();
+
+        itf.lightUp();
+        itf.lightDown();
+    }
+}
+
+public class MachineMain{
+    public static void main(String[ ] args){
+        MachineInterface mci = new Mobile( );
+        Machine mc = new Machine(mci);
+        mc.execFnc( );
+
+        mci = new TV( );
+        mc = new Machine(mci);
+        mc.execFnc( );
+    }
+}
+
+
