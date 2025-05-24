@@ -1,0 +1,13 @@
+
+** Score 테이블
+
+CREATE TABLE score (
+  hak VARCHAR(10), 
+  name VARCHAR(20) NOT NULL, 
+  kor INT CHECK(kor between 0 and 999),
+  eng INT CHECK(kor between 0 and 999),
+  mat INT CHECK(kor between 0 and 999),
+  PRIMARY KEY(hak)
+);
+
+
